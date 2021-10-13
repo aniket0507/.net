@@ -3,3 +3,7 @@ os: windows
 files:
   - source: \WebApplication9\
     destination: C:\inetpub\wwwroot
+hooks:
+  BeforeInstall:
+    - location: \before-install.bat
+      timeout: 900
