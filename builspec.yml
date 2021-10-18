@@ -24,4 +24,4 @@ jobs:
         run: dotnet build -c release --no-restore
       
       - name: Publish App
-        run: dotnet publish -c Release -o ./out
+        run: dotnet publish -c Release -o /WebApplication9/bin/app.publish/
