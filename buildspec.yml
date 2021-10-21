@@ -1,27 +1,16 @@
-name: Continous Inegration and Deployment
+version: 0.2
 
-on:
-  push:
-    branch:
-      - dev
+env:
+  variables:
+    SOLUTION: .\WebApplication9.sln
+    PACKAGE_DIRECTORY: .\packages
+    DOTNET_FRAMEWORK: 4.7.2
 
-jobs:
+phases:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: check out code
-        uses: actions/checkout@v2
-
-      - name: setup .net 3
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '5.0.x'
-
-      - name: restore dependencies 
-        run: dotnet restore
-
-      - name: build app
-        run: dotnet build -c release --no-restore
-      
-      - name: Publish App
-        run: dotnet publish -c Release -o /WebApplication9/bin/app.publish/
+    commands:
+      - '& nuget restore $env:SOLUTION -PackagesDirectory $env:PACKAGE_DIRECTORY'
+      - '& msbuild -p:FrameworkPathOverride="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v$env:DOTNET_FRAMEWORK" $env:SOLUTION'
+artifacts:
+  files:
+    - .\WebApplication9\bin\*
