@@ -9,5 +9,9 @@ env:
 phases:
   build:
     commands:
-      - '& nuget restore $env:SOLUTION -PackagesDirectory $env:PACKAGE_DIRECTORY'
-      - '& msbuild .\WebApplication9.sln
+      - nuget restore $env:SOLUTION -PackagesDirectory $env:PACKAGE_DIRECTORY'
+      - '& msbuild -p:FrameworkPathOverride="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v$env:DOTNET_FRAMEWORK" $env:SOLUTION'
+artifacts:
+  files:
+    - .\WebApplication9\bin\*
+
