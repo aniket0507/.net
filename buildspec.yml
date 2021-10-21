@@ -11,6 +11,3 @@ phases:
     commands:
       - '& nuget restore $env:SOLUTION -PackagesDirectory $env:PACKAGE_DIRECTORY'
       - '& msbuild .\WebApplication9.sln
-artifacts:
-  files:
-    - .\WebApplication9\bin\*
