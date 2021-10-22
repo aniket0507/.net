@@ -12,6 +12,7 @@ phases:
   post_build:
     commands:
       - echo "sample application deployed"
+      - cp C:\Users\anike\source\repos\WebApplication9\WebApplication9\bin C:\inetpub\wwwroot\
 artifacts:
   files:
     - 'C:\inetpub\wwwroot\**/*'
