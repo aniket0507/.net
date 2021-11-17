@@ -1,0 +1,28 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+      name: Checkout Code
+
+    - name: Setup MSBuild Path
+      uses: warrenbuckley/Setup-MSBuild@v1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
+      
+    - name: Build and Publish Web App
+      run: nuget restore WebApplication9/WebApplication9.sln
+      
+    - name: Build and Publish Web App
+      run: msbuild WebApplication9/WebApplication9/WebApplication9.csproj /p:TargetFrameworkVersion=v$env:DOTNET_FRAMEWORK /p:Configuration=Release /p:DeployIisAppPath="Default Web Site" /p:PackageAsSingleFile=false /p:OutDir=C:\codebuild\artifacts\ /t:Package
